@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 /*
+
       -->  Header
           - Logo itle
           -Nav Items (Righy Side)
@@ -19,7 +20,8 @@ import ReactDOM from "react-dom/client";
       -->  Footer
             -Links
             -copyrights
-      */
+
+*/
 
 // create header element using JSX
 // JSX => React.createElement => Object => HTML (DOM) (babel does all the conversion)
@@ -79,7 +81,11 @@ const RestaurantCard = () => {
 
 const Body = () => {
   return (
-    <div>
+    <div className="restaurant-list">
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
       <RestaurantCard />
     </div>
   );
