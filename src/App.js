@@ -23,8 +23,7 @@ import Footer from "./components/Footer";
                         - Rating
             3) Footer
                 - Links
-                - Copyrights
-       
+                - Copyrights       
 */
 
 // AppLayout component to show: Header, Body, Footer
