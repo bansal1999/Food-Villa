@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Title component for display logo (named component)
 export const Title = () => (
@@ -22,9 +23,16 @@ const Header = () => {
       <h1>{Title}</h1>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/about">
+            <li>About</li>
+          </Link>
+          <Link to="/contact">
+            <li>Contact</li>
+          </Link>
+
           <li>
             <i class="fa-solid fa-cart-shopping"></i>
           </li>
