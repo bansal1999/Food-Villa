@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import ReactDOM from "react-dom/client";
 //default import
 import Header from "./components/Header";
@@ -8,6 +8,11 @@ import Header from "./components/Header";
 
 import Body from "./components/Body.js";
 import Footer from "./components/Footer";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import About from "./components/About";
+import Error from "./components/Error";
+import Contact from "./components/Contact.js";
+import RestaurantMenu from "./components/RestaurantMenu.js";
 
 /* My Food App structure will look like this, 
             1) Header
@@ -31,11 +36,38 @@ const AppLayout = () => {
   return (
     <React.Fragment>
       <Header />
-      <Body />
+      {/* Outlet Component by react-router-dom --> the childrren go under outlet */}
+      <Outlet />
       <Footer />
     </React.Fragment>
   );
 };
 
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu />,
+      },
+    ],
+  },
+]);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+root.render(<RouterProvider router={appRouter} />);
