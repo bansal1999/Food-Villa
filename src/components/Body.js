@@ -4,16 +4,8 @@ import { swiggyApiURL } from "../config";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-//Filter the restraurants data according to input type
-function filterData(searchText, restaurants) {
-  const filterData = restaurants.filter(
-    (restaurant) =>
-      restaurant?.data?.name.toLowerCase().includes(searchText.toLowerCase())
-    // optional chaining
-  );
-  return filterData;
-}
+import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 // Body Component for body section: It contain all restaurant cards
 // We are mapping restaurantList array and passing data to RestaurantCard component as props with unique key as index
@@ -49,6 +41,12 @@ const Body = () => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <h1>Offline, please check your connection</h1>;
   }
 
   //use searchData function and set condition if data empty sjpw error message
