@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React, { Children, lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 //default import
 import Header from "./components/Header";
@@ -13,6 +13,12 @@ import About from "./components/About";
 import Error from "./components/Error";
 import Contact from "./components/Contact.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
+import Profile from "./components/Profile";
+import Shimmer from "./components/Shimmer";
+// import Instamart from "./components/Instamart";
+
+// Dynamic Loading instamart component --> (Lazy Loading)
+const Instamart = lazy(() => import("./components/Instamart"));
 
 /* My Food App structure will look like this, 
             1) Header
@@ -56,6 +62,12 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+        children: [
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
       },
       {
         path: "/contact",
@@ -64,6 +76,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Instamart />
+          </Suspense>
+        ),
       },
     ],
   },

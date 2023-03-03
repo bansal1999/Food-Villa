@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../config";
 import Shimmer from "./Shimmer";
+import useRestaurant from "../utils/useRestaurant";
 
 const RestaurantMenu = () => {
   const params = useParams();
@@ -11,21 +12,9 @@ const RestaurantMenu = () => {
   //destructuring on the fly
   // const {restId} = useParams();
 
-  const [restaurant, setRestaurant] = useState(null);
+  //const [restaurant, setRestaurant] = useState(null);
 
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
-
-  async function getRestaurantInfo() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/v4/full?lat=21.1702401&lng=72.83106070000001&menuId=" +
-        resId
-    );
-    const json = await data.json();
-    console.log(json.data);
-    setRestaurant(json.data);
-  }
+  const restaurant = useRestaurant(resId);
 
   return !restaurant ? (
     <Shimmer />
