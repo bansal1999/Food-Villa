@@ -69,7 +69,7 @@ const Body = () => {
 
   return (
     <>
-      <div className="search-container">
+      <div className="p-5 bg-pink-50 my-5">
         <input
           type="text"
           className="search-text"
@@ -82,7 +82,7 @@ const Body = () => {
         />
 
         <button
-          className="search-btn"
+          className="p-2 m-2 bg-purple-400 text-white rounded-lg"
           onClick={() => {
             // user click on button searchData function is called
             serachData(searchText, allRestaurants);
@@ -97,18 +97,20 @@ const Body = () => {
       {allRestaurants?.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="restaurant-list">
-          {filteredRestaurants.map((restaurant) => {
-            return (
-              <Link
-                to={"/restaurant/" + restaurant.data.id}
-                key={restaurant.data.id}
-              >
-                <RestaurantCard {...restaurant.data} />
-              </Link>
-            );
-          })}
-        </div>
+        <>
+          <div className="flex flex-wrap">
+            {filteredRestaurants.map((restaurant) => {
+              return (
+                <Link
+                  to={"/restaurant/" + restaurant.data.id}
+                  key={restaurant.data.id}
+                >
+                  <RestaurantCard {...restaurant.data} />
+                </Link>
+              );
+            })}
+          </div>
+        </>
       )}
     </>
   );

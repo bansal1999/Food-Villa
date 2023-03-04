@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const Title = () => (
   <a href="/">
     <img
-      className="logo"
+      className="h-28 p-2"
       src="https://yt3.googleusercontent.com/ytc/AL5GRJXudT76175T4x4n7eslWM1YkgNLHDSSqfXGoadl=s900-c-k-c0x00ffffff-no-rj"
       alt="Food Villa Logo"
       title="Food Villa"
@@ -18,22 +18,22 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
-    <div className="header">
+    <div className="flex justify-between bg-pink-200 shadow-lg">
       <Title />
       <h1>{Title}</h1>
       <div className="nav-items">
-        <ul>
+        <ul className="flex">
           <Link to="/">
-            <li>Home</li>
+            <li className="px-2">Home</li>
           </Link>
           <Link to="/about">
-            <li>About</li>
+            <li className="px-2">About</li>
           </Link>
           <Link to="/contact">
-            <li>Contact</li>
+            <li className="px-2">Contact</li>
           </Link>
           <Link to="/instamart">
-            <li>Instamart</li>
+            <li className="px-2">Instamart</li>
           </Link>
 
           <li>
