@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import store from "../utils/store";
+import UserContext from "../utils/UserContext";
 // Title component for display logo (named component)
 export const Title = () => (
   <a href="/">
@@ -16,6 +18,9 @@ export const Title = () => (
 // Header component for header section: Logo, Nav Items
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const { user } = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex justify-between bg-pink-200 shadow-lg">
@@ -35,11 +40,12 @@ const Header = () => {
           <Link to="/instamart">
             <li className="px-2">Instamart</li>
           </Link>
+          <Link to="/cart">
+            <li className="px-2">Cart - {cartItems.length}</li>
+          </Link>
+          <li>
+            <span className="p-10 font-bold text-red-900">{user.name}</span>
 
-          <li>
-            <i class="fa-solid fa-cart-shopping"></i>
-          </li>
-          <li>
             {/* Use of conditional rendering to login and logout */}
             {isLoggedIn ? (
               <button
