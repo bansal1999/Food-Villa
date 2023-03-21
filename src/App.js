@@ -16,6 +16,9 @@ import RestaurantMenu from "./components/RestaurantMenu.js";
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
 // import Instamart from "./components/Instamart";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 // Dynamic Loading instamart component --> (Lazy Loading)
 const Instamart = lazy(() => import("./components/Instamart"));
@@ -40,12 +43,14 @@ const Instamart = lazy(() => import("./components/Instamart"));
 // AppLayout component to show: Header, Body, Footer
 const AppLayout = () => {
   return (
-    <React.Fragment>
-      <Header />
-      {/* Outlet Component by react-router-dom --> the childrren go under outlet */}
-      <Outlet />
-      <Footer />
-    </React.Fragment>
+    <Provider store={store}>
+      <React.Fragment>
+        <Header />
+        {/* Outlet Component by react-router-dom --> the childrren go under outlet */}
+        <Outlet />
+        <Footer />
+      </React.Fragment>
+    </Provider>
   );
 };
 
@@ -84,6 +89,10 @@ const appRouter = createBrowserRouter([
             <Instamart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
